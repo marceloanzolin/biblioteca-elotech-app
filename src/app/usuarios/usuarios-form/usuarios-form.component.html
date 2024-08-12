@@ -1,0 +1,66 @@
+<h1 class="mt-4">Usuários</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active">{{usuario.id ? 'Edição': 'Cadastro'}}</li>
+</ol>
+<div class="container">
+
+    <form #clienteForm="ngForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-success" role="alert" *ngIf="success == true">
+                    Usuário salvo/atualizado com sucesso!
+                </div>
+                <div class="alert alert-danger" role="alert" *ngFor="let erro of erros">
+                    {{erro}}
+                </div>
+            </div>
+        </div>
+        <div class="row" *ngIf="usuario.id">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" name="id" [ngModel]="usuario.id" disabled="true">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="dataCadastro">Data Cadastro</label>
+                    <input type="text" class="form-control" name="dataCadastro" disabled="true" [ngModel]="usuario.dataCadastro">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="nome">Nome*</label>
+                    <input type="text" class="form-control" name="nome" [(ngModel)]="usuario.nome">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="email">Email*</label>
+                    <input type="text" class="form-control" name="email" [(ngModel)]="usuario.email">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="email">Telefone*</label>
+                    <input type="text" class="form-control" name="telefone" [(ngModel)]="usuario.telefone">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-success" *ngIf="!usuario.id">
+                    <i class="fas fa-save"></i> Salvar
+                    </button>
+                <button type="submit" class="btn btn-primary" *ngIf="usuario.id">
+                        <i class="fas fa-sync-alt"></i> Atualizar
+                        </button>
+                <button type="button" class="btn btn-danger ml-1" (click)="voltarListagem()">
+                        <i class="fa fa-arrow-circle-left"></i> Voltar
+                        </button>
+            </div>
+        </div>
+    </form>
+</div>

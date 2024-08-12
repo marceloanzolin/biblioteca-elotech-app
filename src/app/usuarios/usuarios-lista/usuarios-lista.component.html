@@ -1,0 +1,75 @@
+<h1 class="mt-4">Clientes</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active">Consulta</li>
+</ol>
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-success" role="alert" *ngIf="mensagemSucesso">
+                {{mensagemSucesso}}
+            </div>
+            <div class="alert alert-danger" role="alert" *ngIf="mensagemErro">
+                {{mensagemErro}}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <button class="btn btn-warning" (click)="novoCadastro()">
+            <i class="fa fa-plus"></i> Novo Usuário
+        </button>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-condensed table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Data Cadastro</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let usuario of usuarios">
+                        <td>{{ usuario.id }}</td>
+                        <td>{{ usuario.nome }}</td>
+                        <td>{{ usuario.email }}</td>
+                        <td>{{ usuario.dataCadastro }}</td>
+                        <td>
+                            <button class="btn btn-primary" routerLink="/usuarios/form/{{usuario.id}}">
+                                <i class="fa fa-edit"></i> Editar
+                              </button>
+                            <button class="btn btn-danger" data-toggle="modal" data-target="#modalDelecao" (click)="preparaDelecao(usuario)">
+                                <i class="fa fa-trash"></i> Excluir
+                              </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div id="modalDelecao" class="modal fade" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modalDelecaoLabel">Confirmação de Exclusão</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <div class="modal-body" *ngIf="usuarioSelecionado">
+                    <p>Tem certeza que deseja excluir o usuário {{usuarioSelecionado.nome}}? </p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn-success" (click)="deletarUsuario()" data-dismiss="modal">Confirma</button>
+                    <button class="btn-default" data-dismiss="modal">Cancela</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
